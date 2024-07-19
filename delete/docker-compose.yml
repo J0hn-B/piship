@@ -1,0 +1,4 @@
+version: "2.1"
+
+# This will remove all services but not the volumes or networks
+services: {}

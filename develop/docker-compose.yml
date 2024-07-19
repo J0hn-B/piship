@@ -1,0 +1,27 @@
+version: "2.1"
+
+volumes:
+  # NetData
+  netdatalib:
+  netdatacache:
+
+services:
+  netdata:
+    image: netdata/netdata:v1.46.2@sha256:ea5a256b29ec592e7a13103d1632bfea0ce58365732d04c8fd32c8d740d3b1fb
+    privileged: true
+    network_mode: host
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    labels:
+      io.balena.features.balena-socket: 1
+      io.balena.features.procfs: 1
+      io.balena.features.supervisor-api: 1
+      io.balena.features.sysfs: 1
+    volumes:
+      - netdatalib:/var/lib/netdata
+      - netdatacache:/var/cache/netdata
+
+    ################
+  ## Access at http://your-ip:19999/
